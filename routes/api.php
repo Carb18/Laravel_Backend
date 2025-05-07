@@ -17,3 +17,30 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('products', function(){
+    // Return products as json format
+    $categories = [
+        "Fideos" => [
+            'Moñitos',
+            'Fideos largos',
+            'Cabello de angel',
+        ],
+        "Verduras" => [
+            'Tomates',
+            'Lechuga',
+            'Cebolla',
+        ],
+    ];
+
+    $products = [];
+    foreach($categories as $categoryArray) {
+        foreach ($categoryArray as $product) {
+            $products[] = $product;
+        }
+    }
+
+    return \Illuminate\Support\Facades\Response::json($products);
+
+
+});
